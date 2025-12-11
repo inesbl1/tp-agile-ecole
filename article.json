@@ -1,0 +1,177 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Inter-Class Football Tournament",
+      "excerpt": "Intense sports competition between 5th and 6th grade classes",
+      "content": "<p><strong>Event Presentation:</strong><br>The inter-class football tournament is an annual sports event that will bring together all 5th and 6th grade classes. This competition aims to promote team spirit, fair play, and sports values among our students.</p><h3>Educational Objectives:</h3><p>• Develop sports and technical skills<br>• Promote cooperation and mutual aid between students<br>• Learn to respect rules and opponents<br>• Manage emotions in a competitive context</p><h3>Planned Schedule:</h3><p>The tournament will take place over three consecutive days. Each class will form a team that will represent its colors. A pool system will allow all teams to play several matches before the final phases.</p>",
+      "category": "sport",
+      "author": "Prof. Sport",
+      "date": "Nov 15-17, 2023",
+      "ageGroup": "10-12 years",
+      "image": "images/football.jpg",
+      "location": "Sports Field - Alpha School",
+      "eventDate": "November 15-17, 2023",
+      "eventTime": "2:00 PM - 4:00 PM",
+      "requiredTools": [
+        "•Sports outfit",
+        "•Football shoes",
+        "•Water bottle",
+        "•Shin guards"
+      ],
+
+      
+      "procedure": [
+        "Team registration by class and competition group formation",
+        "Elimination matches on the first day with pool system",
+        "Semi-finals on the second day between the best teams",
+        "Final and award ceremony on the third day"
+      ],
+      "schedule": "Day 1: Registrations and elimination matches • Day 2: Semi-finals • Day 3: Final and award ceremony"
+    },
+    {
+      "id": 2,
+      "title": "Science Museum Visit",
+      "excerpt": "Interactive science discovery for 2nd and 3rd graders",
+      "content": "<p><strong>Trip Presentation:</strong><br>This educational visit to the Science Museum will allow our 2nd and 3rd grade students to concretely discover the scientific principles studied in class, with a particular focus on renewable energies.</p><h3>Educational Objectives:</h3><p>• Understand different renewable energy sources<br>• Experiment with scientific principles in a fun way<br>• Develop scientific curiosity<br>• Make the connection between theory and practice</p><h3>Planned Schedule:</h3><p>Morning departure by bus, guided museum tour with practical workshops on renewable energies, lunch break on site, and return in the late afternoon.</p>",
+      "category": "school trip",
+      "author": "Mrs. Dubois",
+      "date": "Nov 10, 2023",
+      "ageGroup": "8-10 years",
+      "image": "images/Museum.jpg",
+      "location": "Science Museum - Downtown",
+      "eventDate": "November 10, 2023",
+      "eventTime": "9:00 AM - 4:30 PM",
+      "requiredTools": [
+        "•Notebook",
+        "•Pen",
+        "•Picnic lunch",
+        "•Comfortable clothes"
+      ],
+      "procedure": [
+        "School bus departure at 8:30 AM",
+        "Arrival at museum at 9:00 AM",
+        "Guided tour of renewable energy exhibition",
+        "Practical wind turbine construction workshop",
+        "Lunch break from 12:00 PM to 1:00 PM",
+        "Interactive scientific experiments",
+        "Return to school at 4:30 PM"
+      ],
+      "schedule": "Morning: Transportation and guided tour • Mid-day: Wind turbine construction workshop • Afternoon: Interactive experiments and return"
+    },
+    {
+      "id": 3,
+      "title": "Spelling Competition 2023",
+      "excerpt": "Alpha School spelling champions rewarded",
+      "content": "<p><strong>Competition Presentation:</strong><br>The annual spelling competition aims to value excellence in French and encourage our students to master the subtleties of the French language. This year, the theme will be 'Digital Words'.</p><h3>Educational Objectives:</h3><p>• Improve spelling and grammar mastery<br>• Enrich students' vocabulary<br>• Develop self-confidence in writing<br>• Promote academic excellence</p><h3>Planned Schedule:</h3><p>The competition will begin with a written test followed by a dictation. The teachers' jury will then correct the papers and announce the results with an award ceremony.</p>",
+      "category": "competition",
+      "author": "Mr. Martin",
+      "date": "Nov 3, 2023",
+      "ageGroup": "9-12 years",
+      "image": "images/ortho.jpg",
+      "location": "Multipurpose Room - Main Building",
+      "eventDate": "November 3, 2023",
+      "eventTime": "10:00 AM - 12:00 PM",
+      "requiredTools": [
+        "•Blue pen",
+        "•Rough draft paper",
+        "•Dictionary allowed"
+      ],
+      "procedure": [
+        "Mandatory pre-registration",
+        "45-minute written test",
+        "15-minute dictation",
+        "Correction by teachers' jury",
+        "Results announcement and award ceremony"
+      ],
+      "schedule": "Morning: Written test and dictation • Correction by jury • Afternoon: Results announcement and awards"
+    },
+    {
+      "id": 4,
+      "title": "Creative Pottery Workshop",
+      "excerpt": "Clay art discovery for kindergarten",
+      "content": "<p><strong>Workshop Presentation:</strong><br>This pottery workshop will allow young children to develop their creativity while working on fine motor skills. Each child will leave with their personal creation.</p><h3>Educational Objectives:</h3><p>• Develop creativity and artistic expression<br>• Improve fine motor skills and coordination<br>• Learn to follow instructions step by step<br>• Gain confidence in creative abilities</p><h3>Planned Schedule:</h3><p>Welcome and material distribution, basic techniques demonstration, individual creation with support, drying time for artworks, collective material cleaning, and storage of creations for firing.</p>",
+      "category": "art",
+      "author": "Mrs. Laurent",
+      "date": "Nov 20, 2023",
+      "ageGroup": "4-6 years",
+      "image": "images/poterie.jpg",
+      "location": "Art Room",
+      "eventDate": "November 20, 2023",
+      "eventTime": "9:30 AM - 11:30 AM",
+      "requiredTools": [
+        "•Protective apron",
+        "•Clothes that don't matter if dirty",
+        "•Small towel"
+      ],
+      "procedure": [
+        "Welcome children and distribute materials",
+        "Basic techniques demonstration",
+        "Individual creation with support",
+        "Artworks drying time",
+        "Collective material cleaning",
+        "Storage of creations for firing"
+      ],
+      "schedule": "Session 1: Demonstration and creation • Session 2: Drying and cleaning • Final: Storage for firing"
+    },
+    {
+      "id": 5,
+      "title": "Robotics Club",
+      "excerpt": "Introduction to programming and educational robotics",
+      "content": "<p><strong>Club Presentation:</strong><br>The robotics club offers a fun introduction to programming and engineering concepts. Students will build and program their first robots.</p><h3>Educational Objectives:</h3><p>• Introduce programming basics<br>• Develop logic and problem-solving<br>• Understand basic mechanical principles<br>• Work in teams on technical projects</p><h3>Planned Schedule:</h3><p>Weekly challenge presentation, team formation, robot construction and assembly, feature programming, testing and adjustments, and final presentations of achievements.</p>",
+      "category": "scientific clubs",
+      "author": "Mr. Tech",
+      "date": "Every Wednesday",
+      "ageGroup": "10-14 years",
+      "image": "images/robotic.jpg",
+      "location": "Computer Room - Building B",
+      "eventDate": "Wednesday November 22, 2023",
+      "eventTime": "2:00 PM - 4:00 PM",
+      "requiredTools": [
+        "•Laptop (optional)",
+        "•Notebook",
+        "•Calculator"
+      ],
+      "procedure": [
+        "Weekly challenge presentation",
+        "Work team formation",
+        "Robot construction and assembly",
+        "Feature programming",
+        "Testing and adjustments",
+        "Achievement presentations"
+      ],
+      "schedule": "Weekly: New challenge • Team work • Programming • Testing • Presentation"
+    },
+    
+    {
+      "id": 6,
+      "title": "Olympic Day",
+      "excerpt": "Multi-sport competition following the Olympic Games model",
+      "content": "<p><strong>Event Presentation:</strong><br>Inspired by the Olympic Games, this day offers varied events where each child can shine according to their sports talents.</p><h3>Educational Objectives:</h3><p>• Discover different sports disciplines<br>• Value effort and perseverance<br>• Learn to win and lose with elegance<br>• Develop team spirit</p><h3>Planned Schedule:</h3><p>Opening ceremony and athletes' oath, rotation through sports workshops, lunch break and rest, final events by category, medal ceremony, and return to school with debriefing.</p>",
+      "category": "sport",
+      "author": "Prof. Sport",
+      "date": "Dec 8, 2023",
+      "ageGroup": "6-12 years",
+      "image": "images/olymp.jfif",
+      "location": "Municipal Stadium",
+      "eventDate": "December 8, 2023",
+      "eventTime": "9:00 AM - 5:00 PM",
+      "requiredTools": [
+        "•Complete sports outfit",
+        "•Sports shoes",
+        "•Water bottle",
+        "•Cap",
+        "•Cold meal"
+      ],
+      "procedure": [
+        "Opening ceremony and athletes' oath",
+        "Rotation through sports workshops",
+        "Lunch break and rest",
+        "Final events by category",
+        "Medal award ceremony",
+        "Return to school and debriefing"
+      ],
+      "schedule": "Morning: Opening and workshops • Mid-day: Lunch break • Afternoon: Finals and ceremony • Return: Debriefing"
+    }
+  ]
+}
