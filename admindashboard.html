@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Alpha School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --orange: #d45d40;
+            --white: #ffffff;
+            --primecolor: #63b1af;
+            --light: #EFEFEF;
+            --lightgrey: #e9f6f5;
+            --dark: #3A4852;
+            --text: #343a40;
+            --lightblue: #98D6D3;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: var(--light);
+            color: var(--text);
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--primecolor) 0%, var(--lightblue) 100%);
+            color: var(--white);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logout-btn {
+            background: var(--white);
+            color: var(--primecolor);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* TOP ACTIONS */
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, var(--primecolor), var(--lightblue));
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(99, 177, 175, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primecolor);
+        }
+
+        .search-bar select {
+            padding: 10px 15px;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* ARTICLES GRID */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--lightgrey);
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--lightgrey);
+            color: var(--primecolor);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .article-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .article-excerpt {
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text);
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit, .btn-delete {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-edit {
+            background: var(--primecolor);
+            color: var(--white);
+        }
+
+        .btn-delete {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-edit:hover, .btn-delete:hover {
+            opacity: 0.85;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 15px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primecolor), var(--lightblue));
+            color: var(--white);
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 22px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primecolor);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 12px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            background: var(--lightgrey);
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn-cancel, .btn-save {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-cancel {
+            background: var(--light);
+            color: var(--text);
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, var(--primecolor), var(--lightblue));
+            color: var(--white);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text);
+            opacity: 0.6;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        /* IMAGE PREVIEW */
+        .image-preview {
+            margin-top: 10px;
+            max-width: 200px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .image-preview.show {
+            display: block;
+        }
+
+        /* LOADING STATE */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text);
+        }
+
+        .loading-spinner {
+            border: 4px solid var(--lightgrey);
+            border-top: 4px solid var(--primecolor);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ERROR STATE */
+        .error-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--orange);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .error-state button {
+            margin-top: 20px;
+            background: var(--primecolor);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* SYNC BUTTONS */
+        .sync-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sync-btn {
+            background: var(--light);
+            color: var(--text);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sync-btn:hover {
+            background: var(--primecolor);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .top-actions {
+                flex-direction: column;
+            }
+            
+            .search-bar {
+                max-width: 100%;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .sync-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <h1>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+            Admin Dashboard
+        </h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <!-- TOP ACTIONS -->
+        <div class="top-actions">
+            <button class="add-btn" onclick="openModal()">
+                + Add New Article
+            </button>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search articles..." oninput="filterArticles()">
+                <select id="categoryFilter" onchange="filterArticles()">
+                    <option value="">All Categories</option>
+                    <option value="sport">Sport</option>
+                    <option value="school trip">School Trip</option>
+                    <option value="competition">Competition</option>
+                    <option value="art">Art</option>
+                    <option value="scientific clubs">Scientific Clubs</option>
+                </select>
+            </div>
+            
+            <div class="sync-buttons">
+                <button class="sync-btn" onclick="syncFromFile()">
+                    ↻ Sync from article.json
+                </button>
+                <button class="sync-btn" onclick="exportToClipboard()">
+                    📋 Copy to Clipboard
+                </button>
+            </div>
+        </div>
+
+        <!-- ARTICLES GRID -->
+        <div class="articles-grid" id="articlesGrid">
+            <!-- Loading state will appear here initially -->
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading articles from article.json...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal" id="articleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Article</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="articleForm">
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input type="text" id="title" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="category" required>
+                                <option value="">Select Category</option>
+                                <option value="sport">Sport</option>
+                                <option value="school trip">School Trip</option>
+                                <option value="competition">Competition</option>
+                                <option value="art">Art</option>
+                                <option value="scientific clubs">Scientific Clubs</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date (Auto-generated)</label>
+                            <input type="text" id="date" readonly style="background: var(--lightgrey); cursor: not-allowed;">
+                            <small>Automatically set to current date</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Excerpt/Summary *</label>
+                        <textarea id="excerpt" required placeholder="Brief summary of the article..."></textarea>
+                        <small>Short description that appears on the card</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Full Content *</label>
+                        <textarea id="content" required placeholder="Full article content with HTML tags if needed..."></textarea>
+                        <small>Full article description with details</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image URL *</label>
+                        <input type="text" id="image" required placeholder="images/example.jpg" oninput="previewImage()">
+                        <small>Path to the image file</small>
+                        <img id="imagePreview" class="image-preview" alt="Preview">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Author (Optional)</label>
+                        <input type="text" id="author" placeholder="Prof. Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Age Group (Optional)</label>
+                        <input type="text" id="ageGroup" placeholder="10-12 years">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location (Optional)</label>
+                        <input type="text" id="location" placeholder="Sports Field - Alpha School">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Event Date (Optional)</label>
+                            <input type="text" id="eventDate" placeholder="November 15, 2023">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Event Time (Optional)</label>
+                            <input type="text" id="eventTime" placeholder="2:00 PM - 4:00 PM">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="saveArticle()">Save Article</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let editingId = null;
+        let allArticles = [];
+        let articles = [];
+
+        // GET CURRENT DATE IN NICE FORMAT
+        function getCurrentDate() {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const now = new Date();
+            return `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+        }
+
+        // LOAD ARTICLES FROM article.json FILE
+        async function loadArticlesFromFile() {
+            try {
+                // Show loading state
+                document.getElementById('articlesGrid').innerHTML = `
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading articles from article.json...</p>
+                    </div>
+                `;
+
+                // Fetch from your article.json file
+                const response = await fetch('article.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Handle different JSON structures
+                if (data.articles && Array.isArray(data.articles)) {
+                    allArticles = data.articles;
+                } else if (Array.isArray(data)) {
+                    allArticles = data;
+                } else {
+                    throw new Error('Invalid JSON format in article.json');
+                }
+                
+                // Add missing IDs if needed
+                allArticles = allArticles.map((article, index) => ({
+                    id: article.id || Date.now() + index,
+                    ...article
+                }));
+                
+                articles = [...allArticles];
+                
+                // Save to localStorage as backup/cache
+                localStorage.setItem('articles', JSON.stringify(allArticles));
+                
+                renderArticles();
+                
+                console.log(`✅ Loaded ${allArticles.length} articles from article.json`);
+                return true;
+                
+            } catch (error) {
+                console.error('Error loading article.json:', error);
+                
+                // Show error state
+                document.getElementById('articlesGrid').innerHTML = `
+                    <div class="error-state">
+                        <h3>❌ Could not load article.json</h3>
+                        <p>Error: ${error.message}</p>
+                        <p>Make sure:</p>
+                        <ul style="text-align: left; margin: 10px auto; max-width: 400px;">
+                            <li>article.json exists in the same folder</li>
+                            <li>You're running on a local server (not file://)</li>
+                            <li>The JSON format is valid</li>
+                        </ul>
+                        <button onclick="useLocalStorageFallback()">Use cached articles instead</button>
+                    </div>
+                `;
+                
+                return false;
+            }
+        }
+
+        // FALLBACK TO LOCALSTORAGE IF FILE CAN'T BE LOADED
+        function useLocalStorageFallback() {
+            const stored = localStorage.getItem('articles');
+            
+            if (stored) {
+                allArticles = JSON.parse(stored);
+                articles = [...allArticles];
+                renderArticles();
+                alert('⚠️ Using cached articles from previous session');
+            } else {
+                document.getElementById('articlesGrid').innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="9"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                        <h3>No articles found</h3>
+                        <p>Could not load article.json and no cached articles found.</p>
+                        <button onclick="loadArticlesFromFile()" style="margin-top: 20px; background: var(--primecolor); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // SYNC FROM FILE (RELOAD)
+        async function syncFromFile() {
+            const success = await loadArticlesFromFile();
+            if (success) {
+                alert(`✅ Synced ${allArticles.length} articles from article.json`);
+            }
+        }
+
+        // RENDER ARTICLES
+        function renderArticles() {
+            const grid = document.getElementById('articlesGrid');
+            
+            if (articles.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="9"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                        <h3>No articles found</h3>
+                        <p>Start by adding your first article</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = articles.map(article => `
+                <div class="article-card">
+                    <img src="${article.image}" alt="${article.title}" class="article-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23e9f6f5%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%2363b1af%22 font-family=%22Arial%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+                    <div class="article-content">
+                        <span class="article-category">${article.category}</span>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                        <div class="article-meta">
+                            <span>${article.author || 'Admin'}</span>
+                            <span>${article.date}</span>
+                        </div>
+                        <div class="article-actions">
+                            <button class="btn-edit" onclick="editArticle(${article.id})">Edit</button>
+                            <button class="btn-delete" onclick="deleteArticle(${article.id})">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // OPEN MODAL
+        function openModal(isEdit = false) {
+            document.getElementById('articleModal').classList.add('active');
+            document.getElementById('modalTitle').textContent = isEdit ? 'Edit Article' : 'Add New Article';
+            if (!isEdit) {
+                document.getElementById('articleForm').reset();
+                editingId = null;
+                document.getElementById('imagePreview').classList.remove('show');
+                // Set current date automatically
+                document.getElementById('date').value = getCurrentDate();
+            }
+        }
+
+        // CLOSE MODAL
+        function closeModal() {
+            document.getElementById('articleModal').classList.remove('active');
+            document.getElementById('articleForm').reset();
+            editingId = null;
+            document.getElementById('imagePreview').classList.remove('show');
+        }
+
+        // PREVIEW IMAGE
+        function previewImage() {
+            const url = document.getElementById('image').value;
+            const preview = document.getElementById('imagePreview');
+            if (url) {
+                preview.src = url;
+                preview.classList.add('show');
+            } else {
+                preview.classList.remove('show');
+            }
+        }
+
+        // SAVE ARTICLE
+        function saveArticle() {
+            const form = document.getElementById('articleForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const articleData = {
+                id: editingId || Date.now(),
+                title: document.getElementById('title').value,
+                excerpt: document.getElementById('excerpt').value,
+                content: document.getElementById('content').value,
+                category: document.getElementById('category').value,
+                date: document.getElementById('date').value || getCurrentDate(),
+                image: document.getElementById('image').value,
+                author: document.getElementById('author').value || 'Admin',
+                ageGroup: document.getElementById('ageGroup').value || '',
+                location: document.getElementById('location').value || '',
+                eventDate: document.getElementById('eventDate').value || '',
+                eventTime: document.getElementById('eventTime').value || ''
+            };
+
+            if (editingId) {
+                const index = allArticles.findIndex(a => a.id === editingId);
+                allArticles[index] = articleData;
+            } else {
+                allArticles.push(articleData);
+            }
+
+            articles = [...allArticles];
+            
+            // Save to localStorage
+            localStorage.setItem('articles', JSON.stringify(allArticles));
+            
+            renderArticles();
+            closeModal();
+            
+            // Inform user to export
+            alert('✅ Article saved!\n\n⚠️ Remember to export your changes to article.json using the "Copy to Clipboard" button.');
+        }
+
+        // EDIT ARTICLE
+        function editArticle(id) {
+            const article = allArticles.find(a => a.id === id);
+            if (!article) return;
+
+            editingId = id;
+            document.getElementById('title').value = article.title;
+            document.getElementById('excerpt').value = article.excerpt;
+            document.getElementById('content').value = article.content;
+            document.getElementById('category').value = article.category;
+            document.getElementById('date').value = article.date;
+            document.getElementById('image').value = article.image;
+            document.getElementById('author').value = article.author || '';
+            document.getElementById('ageGroup').value = article.ageGroup || '';
+            document.getElementById('location').value = article.location || '';
+            document.getElementById('eventDate').value = article.eventDate || '';
+            document.getElementById('eventTime').value = article.eventTime || '';
+            
+            previewImage();
+            openModal(true);
+        }
+
+        // DELETE ARTICLE
+        function deleteArticle(id) {
+            if (!confirm('Are you sure you want to delete this article?')) return;
+            
+            allArticles = allArticles.filter(a => a.id !== id);
+            articles = [...allArticles];
+            localStorage.setItem('articles', JSON.stringify(allArticles));
+            renderArticles();
+            
+            alert('✅ Article deleted!\n\n⚠️ Remember to export your changes to article.json using the "Copy to Clipboard" button.');
+        }
+
+        // FILTER ARTICLES
+        function filterArticles() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+
+            articles = allArticles.filter(article => {
+                const matchesSearch = article.title.toLowerCase().includes(search) ||
+                                    article.excerpt.toLowerCase().includes(search);
+                const matchesCategory = !category || article.category === category;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderArticles();
+        }
+
+        // EXPORT TO CLIPBOARD (TO UPDATE YOUR article.json FILE)
+        function exportToClipboard() {
+            const jsonString = JSON.stringify(allArticles, null, 2);
+            navigator.clipboard.writeText(jsonString).then(() => {
+                alert('✅ Articles JSON copied to clipboard!\n\nNow:\n1. Open your article.json file\n2. Replace ALL content\n3. Paste the copied JSON\n4. Save the file');
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = jsonString;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('✅ Articles copied!\n\nPaste into your article.json file.');
+            });
+        }
+
+        // LOGOUT
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // INITIALIZE - LOAD FROM article.json ON START
+        async function init() {
+            await loadArticlesFromFile();
+        }
+
+        // CLOSE MODAL ON OUTSIDE CLICK
+        document.getElementById('articleModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // INITIALIZE ON LOAD
+        init();
+    </script>
+</body>
+</html>

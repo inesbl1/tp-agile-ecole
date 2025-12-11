@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Admin - Sign Up</title>
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --orange: #d45d40;
+            --white: #ffffff;
+            --primecolor: #63b1af;
+            --light: #EFEFEF;
+            --lightgrey: #e9f6f5;
+            --dark: #3A4852;
+            --text: #343a40;
+            --lightblue: #98D6D3;
+        }
+
+        /* ===== BODY & BACKGROUND ===== */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primecolor) 0%, var(--lightblue) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* ===== HEADER SECTION ===== */
+        .header {
+            background: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+            color: var(--dark);
+            border-bottom: 1px solid var(--light);
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: var(--lightgrey);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .header h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .header p {
+            margin: 0;
+            opacity: 0.7;
+            font-size: 15px;
+            color: var(--text);
+        }
+
+        /* ===== FORM CONTAINER ===== */
+        .form-container {
+            padding: 30px;
+        }
+
+        /* Success message styling */
+        .success-message {
+            background: var(--lightgrey);
+            color: var(--primecolor);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* ===== FORM GROUPS ===== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Input wrapper for icons */
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primecolor);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* ===== INPUT FIELDS ===== */
+        input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid var(--light);
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border: 2px solid var(--primecolor);
+        }
+
+        input.error {
+            border: 2px solid var(--orange);
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: var(--orange);
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Password show/hide toggle */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--primecolor);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primecolor), var(--lightblue));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(99, 177, 175, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 177, 175, 0.4);
+        }
+
+        /* ===== FOOTER SECTION ===== */
+        .footer {
+            padding: 20px 30px;
+            background: var(--lightgrey);
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--orange);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #c34d30;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== MAIN SIGNUP CONTAINER ===== -->
+    <div class="container">
+        <!-- Header with logo and title -->
+        <div class="header">
+            <div class="icon-circle">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primecolor)">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+            </div>
+            <h1>Create Account</h1>
+            <p>Sign up as school administrator</p>
+        </div>
+
+        <!-- Form section -->
+        <div class="form-container">
+            <!-- Success message (hidden by default) -->
+            <div class="success-message" id="successMessage"></div>
+
+            <!-- Name input -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">A</span>
+                    <input type="text" id="name" placeholder="Enter your full name">
+                </div>
+                <span class="error-message" id="nameError"></span>
+            </div>
+
+            <!-- Email input -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">@</span>
+                    <input type="email" id="email" placeholder="admin@school.com">
+                </div>
+                <span class="error-message" id="emailError"></span>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">•••</span>
+                    <input type="password" id="password" placeholder="Enter password">
+                    <button type="button" class="password-toggle" id="togglePassword">Show</button>
+                </div>
+                <span class="error-message" id="passwordError"></span>
+            </div>
+
+            <!-- Confirm Password input -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">•••</span>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                </div>
+                <span class="error-message" id="confirmError"></span>
+            </div>
+
+            <!-- Signup button -->
+            <button class="btn" id="signupBtn">Sign Up</button>
+        </div>
+
+        <!-- Footer with login link -->
+        <div class="footer">
+            <p>
+                Already have an account? 
+                <a href="login.html">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ===== GET DOM ELEMENTS =====
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const signupBtn = document.getElementById('signupBtn');
+        const togglePassword = document.getElementById('togglePassword');
+        const successMessage = document.getElementById('successMessage');
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmError = document.getElementById('confirmError');
+
+        // ===== PASSWORD VISIBILITY TOGGLE =====
+        togglePassword.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                confirmPasswordInput.type = 'text';
+                togglePassword.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                confirmPasswordInput.type = 'password';
+                togglePassword.textContent = 'Show';
+            }
+        });
+
+        // ===== SIGNUP BUTTON CLICK =====
+        signupBtn.addEventListener('click', handleSignup);
+
+        // ===== ALLOW ENTER KEY TO SUBMIT =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleSignup();
+            }
+        });
+
+        // ===== MAIN SIGNUP FUNCTION =====
+        function handleSignup() {
+            // Clear previous errors
+            clearErrors();
+            successMessage.classList.remove('show');
+
+            // Validate form inputs
+            if (!validateForm()) return;
+
+            // Create admin object
+            const admin = {
+                name: nameInput.value.trim(),
+                email: emailInput.value.trim(),
+                password: passwordInput.value
+            };
+
+            // Save to localStorage
+            localStorage.setItem('admin', JSON.stringify(admin));
+
+            // Save credentials temporarily for auto-fill on login page
+            localStorage.setItem('tempEmail', admin.email);
+            localStorage.setItem('tempPassword', admin.password);
+
+            // Show success message
+            successMessage.textContent = 'Account created successfully! Redirecting to login...';
+            successMessage.classList.add('show');
+
+            // Redirect to login page after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        }
+
+        // ===== FORM VALIDATION =====
+        function validateForm() {
+            let isValid = true;
+
+            // Check if name is empty
+            if (!nameInput.value.trim()) {
+                showError(nameInput, nameError, 'Name is required');
+                isValid = false;
+            }
+
+            // Check if email is empty
+            if (!emailInput.value.trim()) {
+                showError(emailInput, emailError, 'Email is required');
+                isValid = false;
+            } 
+            // Check if email format is valid
+            else if (!isValidEmail(emailInput.value)) {
+                showError(emailInput, emailError, 'Email is invalid');
+                isValid = false;
+            }
+
+            // Check if password is empty
+            if (!passwordInput.value) {
+                showError(passwordInput, passwordError, 'Password is required');
+                isValid = false;
+            } 
+            // Check if password is at least 6 characters
+            else if (passwordInput.value.length < 6) {
+                showError(passwordInput, passwordError, 'Password must be at least 6 characters');
+                isValid = false;
+            }
+
+            // Check if passwords match
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                showError(confirmPasswordInput, confirmError, 'Passwords do not match');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // ===== EMAIL VALIDATION HELPER =====
+        function isValidEmail(email) {
+            return /\S+@\S+\.\S+/.test(email);
+        }
+
+        // ===== SHOW ERROR MESSAGE =====
+        function showError(input, errorElement, message) {
+            input.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
+
+        // ===== CLEAR ALL ERRORS =====
+        function clearErrors() {
+            const inputs = [nameInput, emailInput, passwordInput, confirmPasswordInput];
+            const errors = [nameError, emailError, passwordError, confirmError];
+
+            inputs.forEach(input => input.classList.remove('error'));
+            errors.forEach(error => error.classList.remove('show'));
+        }
+    </script>
+</body>
+</html>
