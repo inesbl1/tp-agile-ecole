@@ -8,18 +8,20 @@
 </head>
 <body>
     
-    <!-- Header -->
-    <div class="header">
-       <div class="left-section">
-           <p class="logo">🏫<span>Alpha</span>School</p>
-       </div>
-       <div class="right-section">
-         <button>🏠 Home</button>
-         <button>📚 Articles</button>
-         <button>🎉 Events</button>
-         <button>📞 Contacts</button>
-       </div>
-    </div>
+    <!-- Navigation -->
+    <nav id="mainNav">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Alpha School Logo" class="logo-image">
+                <span class="logo-text">Alpha School</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">Our School</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Category Title -->
     <div class="categorie">
@@ -70,22 +72,64 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-box">
-            <h3>🏫<span>Alpha</span>School</h3>
-            <p>Empowering students through knowledge and activities</p>
-        </div>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>
+                        <img src="logo.png" alt="Alpha School" class="footer-logo">
+                        Alpha School
+                    </h3>
+                    <p>Achieving excellence by nurturing a love of learning. A place where every student is welcomed, valued, and prepared for success.</p>
+                </div>
 
-        <div class="footer-box">
-            <h4>Quick Links</h4>
-            <a class="href" href="#">Home</a>
-            <a class="href" href="#">Articles</a>
-            <a class="href" href="#">Events</a>
-            <a class="href" href="#">Contact</a>
-        </div>
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-item">
+                        <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <p>123 Education Street, Learning City, LC 12345</p>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <p>Alpha.School@gmail.com </p>
+                    </div>
+                </div>
 
-        <p class="copyright">© 2025 School Portal. All rights reserved.</p>
+                <!-- Map Section -->
+                <div class="footer-section">
+  <h3>Find Us</h3>
+
+  <!-- anchor opens Google Maps in a new tab (replace address or coords below) -->
+  <a id="mapLink" href="#" target="_blank" rel="noopener" aria-label="Open Alpha School location in Google Maps">
+    <div class="map-placeholder" role="button" tabindex="0" aria-pressed="false">
+      <svg class="map-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+    </div>
+  </a>
+
+  <p class="map-text" id="mapText">Click to view full map</p>
+</div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Alpha School. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-
   <!-- JS -->
   <script src="script.js"></script>
 
